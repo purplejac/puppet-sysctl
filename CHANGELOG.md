@@ -1,3 +1,6 @@
+#### 2025-01-06 - 1.0.11
+* Corrected missing path identifier
+
 #### 2025-01-06 - 1.0.10
 * Moved away from using an absolute path to expand compatibility across OS versions
 * Fixed issue comparing tabbed and non-tabbed data in the resource declaration
