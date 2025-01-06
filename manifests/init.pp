@@ -104,7 +104,7 @@ define sysctl (
       $qvalue = shellquote("${value}").regsubst("[ |\t]+", " ", 'G')      # lint:endignore
       exec { "enforce-sysctl-value-${qtitle}":
         unless  => "/usr/bin/test \"$(/sbin/sysctl -n ${qtitle} | sed -r -e 's/[ \t]+/ /g')\" = ${qvalue}",
-        path        => ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+        path    => ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
         command => "/sbin/sysctl -w ${qtitle}=${qvalue}",
       }
     }
