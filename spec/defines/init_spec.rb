@@ -61,7 +61,7 @@ describe 'sysctl', type: :define do
       it do
         is_expected.to contain_exec('sysctl-net.ipv4.ip_forward').only_with(
           command:     'sysctl -p /etc/sysctl.d/net.ipv4.ip_forward.conf',
-          path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+          path: ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
           refreshonly: true,
           require:     'File[/etc/sysctl.d/net.ipv4.ip_forward.conf]',
         )
@@ -70,7 +70,7 @@ describe 'sysctl', type: :define do
       it do
         is_expected.to contain_exec('update-sysctl.conf-net.ipv4.ip_forward').only_with(
           command:     "sed -i -e 's#^net.ipv4.ip_forward *=.*#net.ipv4.ip_forward = 1#' /etc/sysctl.conf",
-          path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+          path: ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
           refreshonly: true,
           onlyif:      "grep -E '^net.ipv4.ip_forward *=' /etc/sysctl.conf",
         )
@@ -79,7 +79,7 @@ describe 'sysctl', type: :define do
       it do
         is_expected.to contain_exec('enforce-sysctl-value-net.ipv4.ip_forward').only_with(
           unless:  %r{.*/usr/bin/test \"\$\(/sbin/sysctl -n net.ipv4.ip_forward | /usr/bin/sed -r -e 's/\[ \\t\]+/ /g'\)\" = 1},
-          path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+          path: ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
           command: '/sbin/sysctl -w net.ipv4.ip_forward=1',
         )
       end
@@ -119,7 +119,7 @@ describe 'sysctl', type: :define do
         it do
           is_expected.to contain_exec('enforce-sysctl-value-net.ipv4.ip_forward').only_with(
             unless:  %r{.*/usr/bin/test \"\$\(/sbin/sysctl -n net.ipv4.ip_forward | /usr/bin/sed -r -e 's/\[ \\t\]+/ /g'\)\" = 1},
-            path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+            path: ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
             command: '/sbin/sysctl -w net.ipv4.ip_forward=1',
           )
         end
@@ -167,7 +167,7 @@ describe 'sysctl', type: :define do
         it do
           is_expected.to contain_exec('sysctl-net.ipv4.ip_forward').with(
             command: 'sysctl -p /etc/sysctl.d/net.ipv4.ip_forward.testing',
-            path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
+            path: ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
             require: 'File[/etc/sysctl.d/net.ipv4.ip_forward.testing]',
           )
         end
