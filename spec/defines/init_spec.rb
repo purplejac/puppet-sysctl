@@ -79,6 +79,7 @@ describe 'sysctl', type: :define do
       it do
         is_expected.to contain_exec('enforce-sysctl-value-net.ipv4.ip_forward').only_with(
           unless:  %r{.*/usr/bin/test \"\$\(/sbin/sysctl -n net.ipv4.ip_forward | /usr/bin/sed -r -e 's/\[ \\t\]+/ /g'\)\" = 1},
+          path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
           command: '/sbin/sysctl -w net.ipv4.ip_forward=1',
         )
       end
@@ -118,6 +119,7 @@ describe 'sysctl', type: :define do
         it do
           is_expected.to contain_exec('enforce-sysctl-value-net.ipv4.ip_forward').only_with(
             unless:  %r{.*/usr/bin/test \"\$\(/sbin/sysctl -n net.ipv4.ip_forward | /usr/bin/sed -r -e 's/\[ \\t\]+/ /g'\)\" = 1},
+            path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
             command: '/sbin/sysctl -w net.ipv4.ip_forward=1',
           )
         end
@@ -165,6 +167,7 @@ describe 'sysctl', type: :define do
         it do
           is_expected.to contain_exec('sysctl-net.ipv4.ip_forward').with(
             command: 'sysctl -p /etc/sysctl.d/net.ipv4.ip_forward.testing',
+            path:        ['/usr/sbin', '/sbin', '/usr/bin', '/bin'],
             require: 'File[/etc/sysctl.d/net.ipv4.ip_forward.testing]',
           )
         end
